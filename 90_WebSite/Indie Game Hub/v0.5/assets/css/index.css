@@ -1,0 +1,309 @@
+/* =========================
+   index.css (clean + consistent theme)
+   Uses only selectors present in index.html
+========================= */
+
+:root {
+  --text: #c7c7c7;
+  --muted: #2464c3;
+
+  --card: #2464c3;
+  --card-shadow: rgba(0, 0, 0, 0.14);
+
+  --radius: 12px;
+  --transition: 0.25s;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  line-height: 1.6;
+
+  max-width: 100vw;
+  overflow-x: hidden;
+
+  background: linear-gradient(180deg, rgba(68, 107, 207, 0.95), rgba(140, 173, 214, 0.92));
+  transition: background-color var(--transition) ease, color var(--transition) ease;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================
+   Header / Nav
+========================= */
+
+header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 20;
+
+  background-color: rgba(71, 106, 204, 0.87);
+  backdrop-filter: blur(6px);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+
+  margin: 0.9rem;
+  padding: 0.9rem;
+
+  border-radius: calc(var(--radius) + 8px);
+}
+
+.nav-buttons ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  margin: 0;
+  padding: 0;
+
+  width: 100%;
+}
+
+/* Dein HTML hat .logo als div in ul – wir stylen es trotzdem stabil */
+.logo {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+}
+
+/* Links: Logo + Icons */
+.logo a,
+.nav-buttons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+  color: var(--text);
+  background-color: rgba(36, 100, 195, 0.85);
+
+  padding: 0.85rem 1rem;
+  border-radius: 999px;
+
+  transition: transform var(--transition) ease, box-shadow var(--transition) ease, background var(--transition) ease;
+}
+
+.logo a {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  padding: 0.85rem 1.2rem;
+}
+
+.nav-buttons i {
+  font-size: 1.45rem;
+}
+
+.logo a:hover,
+.logo a:focus,
+.nav-buttons a:hover,
+.nav-buttons a:focus {
+  transform: translateY(-1px) scale(1.03);
+  background-color: rgba(36, 100, 195, 0.95);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+  outline: none;
+}
+
+/* Tastatur-Fokus sichtbar */
+.logo a:focus-visible,
+.nav-buttons a:focus-visible,
+.download-button:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.55);
+  outline-offset: 3px;
+}
+
+/* =========================
+   Main
+========================= */
+
+main {
+  flex: 1 0 auto;
+  padding: 2.2rem 1rem 2.5rem;
+}
+
+.featured-games {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.featured-games h2 {
+  font-size: 1.35rem;
+  text-align: center;
+
+  margin: 0.2rem auto 1.4rem;
+  padding: 0.9rem 1.2rem;
+
+  width: min(520px, 92vw);
+
+  background-color: rgba(36, 100, 195, 0.8);
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+}
+
+/* =========================
+   Cards
+========================= */
+
+.game-card-container {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.4rem;
+
+  padding: 0.8rem;
+}
+
+.game-card {
+  display: flex;
+  flex-direction: column;
+
+  background-color: rgba(36, 100, 195, 0.78);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+
+  overflow: hidden;
+  transition: transform var(--transition) ease, box-shadow var(--transition) ease;
+}
+
+.game-card:hover,
+.game-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+}
+
+.game-link {
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.game-card img {
+  width: 10rem;
+  height: 10rem;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  padding-top: 2rem;
+}
+
+.game-card h3 {
+  margin: 0;
+  padding: 1rem 1rem 0.9rem;
+
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Button */
+.download-button {
+  margin: 0.2rem 1rem 1rem;
+  align-self: center;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.75rem 1.35rem;
+
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--text);
+
+  background: linear-gradient(135deg, rgba(40, 40, 40, 0.92), rgba(0, 0, 0, 0.82));
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.24);
+
+  transition: transform var(--transition) ease, box-shadow var(--transition) ease, background var(--transition) ease;
+}
+
+.download-button:hover,
+.download-button:focus {
+  transform: translateY(-1px) scale(1.04);
+  background: linear-gradient(135deg, rgba(44, 82, 113, 0.95), rgba(19, 54, 102, 0.92));
+  box-shadow: 0 12px 22px rgba(30, 80, 160, 0.45);
+  outline: none;
+}
+
+/* =========================
+   Footer
+========================= */
+
+footer {
+  padding: 1.2rem 1rem;
+  text-align: center;
+  background-color: rgba(71, 106, 204, 0.87);
+  backdrop-filter: blur(6px);
+}
+
+footer p {
+  margin: 0.25rem 0;
+  opacity: 0.95;
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 1100px) {
+  .game-card-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  nav {
+    justify-content: center;
+  }
+
+  .nav-buttons ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .logo {
+    margin-right: 0;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .game-card-container {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-games h2 {
+    font-size: 1.2rem;
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

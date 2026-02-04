@@ -1,0 +1,310 @@
+/* =========================
+   unitygame1.css (index-look + polished Unity window)
+========================= */
+
+:root {
+  --text: #c7c7c7;
+  --muted: #2464c3;
+
+  --radius: 12px;
+  --transition: 0.25s;
+
+  --card: rgba(36, 100, 195, 0.78);
+  --card-shadow: rgba(0, 0, 0, 0.22);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  line-height: 1.6;
+
+  max-width: 100vw;
+  overflow-x: hidden;
+
+  background: linear-gradient(180deg, rgba(68, 107, 207, 0.95), rgba(140, 173, 214, 0.92));
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================
+   Header / Nav (same as index)
+========================= */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background-color: rgba(71, 106, 204, 0.87);
+  backdrop-filter: blur(6px);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  margin: 0.9rem;
+  padding: 0.9rem;
+}
+
+.nav-buttons ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+}
+
+.logo a,
+.logo a1,
+.nav-buttons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.85rem 1.1rem;
+  border-radius: 999px;
+
+  background-color: rgba(36, 100, 195, 0.85);
+  color: var(--text);
+  text-decoration: none;
+
+  transition: transform var(--transition) ease,
+              box-shadow var(--transition) ease,
+              background var(--transition) ease;
+}
+
+.logo a,
+.logo a1 {
+  font-weight: 600;
+  padding: 0.85rem 1.2rem;
+}
+
+.nav-buttons i {
+  font-size: 1.45rem;
+}
+
+.logo a:hover,
+.logo a1:hover,
+.nav-buttons a:hover {
+  transform: translateY(-1px) scale(1.03);
+  background-color: rgba(36, 100, 195, 0.95);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* =========================
+   Main layout (keeps footer visible, centers Unity window)
+========================= */
+
+main {
+  flex: 1 0 auto;
+  padding: 2rem 1rem 2.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Unity root container: we "cardify" it */
+#unity-container {
+  width: min(1100px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+
+  padding: 1rem;
+  border-radius: var(--radius);
+  background-color: rgba(36, 100, 195, 0.26);
+}
+
+/* =========================
+   Unity Canvas "Window"
+========================= */
+
+/*
+  Most Unity templates set width/height in HTML/JS.
+  We keep it responsive with max-width + aspect-ratio-ish behavior:
+*/
+#unity-canvas {
+  width: min(960px, 100%);
+  height: auto;
+  aspect-ratio: 16 / 9; /* makes it look like a real window if height isn't fixed */
+
+  display: block;
+  background: #231f20;
+
+  border-radius: var(--radius);
+  box-shadow: 0 14px 28px var(--card-shadow);
+
+  /* avoids blurry edges on some GPUs */
+  image-rendering: auto;
+}
+
+/* Desktop template compatibility */
+#unity-container.unity-desktop #unity-canvas {
+  width: min(960px, 100%);
+}
+
+/* Mobile template: use full width */
+#unity-container.unity-mobile #unity-canvas {
+  width: 100%;
+}
+
+/* =========================
+   Loading / Progress (clean + centered)
+========================= */
+
+#unity-loading-bar {
+  width: min(420px, 92vw);
+  margin-top: 0.5rem;
+
+  padding: 1rem;
+  border-radius: var(--radius);
+
+  background-color: var(--card);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+}
+
+#unity-logo {
+  margin: 0 auto 0.7rem;
+}
+
+#unity-progress-bar-empty {
+  width: 100%;
+  height: 18px;
+  border-radius: 999px;
+  overflow: hidden;
+
+  background: rgba(0, 0, 0, 0.18);
+}
+
+#unity-progress-bar-full {
+  height: 18px;
+  width: 0%;
+  border-radius: 999px;
+
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.2));
+}
+
+/* =========================
+   Unity Footer Bar (fullscreen + title)
+========================= */
+
+#unity-footer {
+  width: min(960px, 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0.65rem 0.8rem;
+  border-radius: var(--radius);
+
+  background-color: rgba(36, 100, 195, 0.55);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+}
+
+#unity-build-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Make fullscreen button feel like the site */
+#unity-fullscreen-button {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+
+  cursor: pointer;
+  transition: transform var(--transition) ease, box-shadow var(--transition) ease;
+}
+
+#unity-fullscreen-button:hover {
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* Warnings: readable and not ugly */
+#unity-warning {
+  width: min(960px, 100%);
+  border-radius: var(--radius);
+  padding: 0.8rem 1rem;
+  margin-top: 0.4rem;
+
+  background-color: rgba(0, 0, 0, 0.18);
+  color: var(--text);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+
+  display: none; /* Unity toggles this when needed */
+}
+
+/* =========================
+   Page Footer (same as index)
+========================= */
+
+footer {
+  padding: 1.2rem 1rem;
+  text-align: center;
+  background-color: rgba(71, 106, 204, 0.87);
+  backdrop-filter: blur(6px);
+}
+
+footer p {
+  margin: 0.25rem 0;
+  opacity: 0.95;
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 768px) {
+  nav {
+    justify-content: center;
+  }
+
+  .nav-buttons ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .logo {
+    margin-right: 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  #unity-footer {
+    flex-direction: column;
+    gap: 0.6rem;
+    text-align: center;
+  }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
